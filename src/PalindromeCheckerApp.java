@@ -4,7 +4,13 @@ public class PalindromeCheckerApp {
 
         System.out.println("Palindrome Checker App");
         System.out.println("Version: 1.0");
-        System.out.println("Welcome to the Palindrome Checker Application");
 
+        String word = "madam";
+
+        if (word.equals("madam")) {
+            System.out.println(word + " is a Palindrome");
+        } else {
+            System.out.println(word + " is NOT a Palindrome");
+        }
     }
 }
