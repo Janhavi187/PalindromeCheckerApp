@@ -2,18 +2,31 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        System.out.println("Palindrome Checker App");
+        String word = "racecar";
 
-        String word = "madam";
+        char[] arr = word.toCharArray();
 
-        if(word.equals(new StringBuilder(word).reverse().toString()))
+        int start = 0;
+        int end = arr.length - 1;
+
+        boolean palindrome = true;
+
+        while(start < end)
         {
-            System.out.println(word + " is a palindrome");
+            if(arr[start] != arr[end])
+            {
+                palindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
         }
+
+        if(palindrome)
+            System.out.println(word + " is palindrome");
         else
-        {
-            System.out.println(word + " is not a palindrome");
-        }
+            System.out.println(word + " is not palindrome");
 
     }
 
