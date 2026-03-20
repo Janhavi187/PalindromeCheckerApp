@@ -1,16 +1,45 @@
-import java.util.Scanner;
+import java.util.*;
 
-class PalindromeService {
+// Strategy Interface
+interface PalindromeStrategy {
+    boolean check(String word);
+}
 
-    public boolean checkPalindrome(String word) {
+// Stack Strategy
+class StackStrategy implements PalindromeStrategy {
+    public boolean check(String word) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : word.toCharArray()) {
+            stack.push(c);
+        }
 
         String reversed = "";
 
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed += word.charAt(i);
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
         }
 
         return word.equals(reversed);
+    }
+}
+
+// Deque Strategy
+class DequeStrategy implements PalindromeStrategy {
+    public boolean check(String word) {
+        Deque<Character> deque = new LinkedList<>();
+
+        for (char c : word.toCharArray()) {
+            deque.add(c);
+        }
+
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 
@@ -18,16 +47,16 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        System.out.println("Palindrome Checker App - UC11");
+        System.out.println("Palindrome Checker App - UC12");
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a word: ");
+        System.out.print("Enter word: ");
         String word = sc.nextLine();
 
-        PalindromeService service = new PalindromeService();
+        PalindromeStrategy strategy = new StackStrategy(); // can change to DequeStrategy
 
-        if (service.checkPalindrome(word)) {
+        if (strategy.check(word)) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
