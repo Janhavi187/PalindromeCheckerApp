@@ -1,31 +1,36 @@
 import java.util.Scanner;
 
+// Service class (OOP concept)
+class PalindromeService {
+
+    public boolean checkPalindrome(String word) {
+
+        String reversed = "";
+
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversed += word.charAt(i);
+        }
+
+        return word.equals(reversed);
+    }
+}
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        System.out.println("Palindrome Checker App - UC10");
+        System.out.println("Palindrome Checker App - UC11");
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a sentence: ");
-        String input = sc.nextLine();
+        System.out.print("Enter a word: ");
+        String word = sc.nextLine();
 
-        // Step 1: Remove spaces
-        input = input.replaceAll("\\s+", "");
+        // Object creation
+        PalindromeService service = new PalindromeService();
 
-        // Step 2: Convert to lowercase
-        input = input.toLowerCase();
-
-        // Step 3: Reverse string
-        String reversed = "";
-
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed += input.charAt(i);
-        }
-
-        // Step 4: Compare
-        if (input.equals(reversed)) {
+        // Calling method
+        if (service.checkPalindrome(word)) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
