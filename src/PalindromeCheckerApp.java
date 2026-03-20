@@ -1,34 +1,61 @@
 import java.util.Scanner;
-import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
+    static class Node {
+        char data;
+        Node next;
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter a word: ");
-        String word = scanner.nextLine();
-
-        Stack<Character> stack = new Stack<>();
-
-        for(char c : word.toCharArray())
-        {
-            stack.push(c);
+        Node(char data) {
+            this.data = data;
+            this.next = null;
         }
+    }
 
+    public static boolean isPalindrome(Node head) {
+
+        String original = "";
         String reverse = "";
 
-        while(!stack.isEmpty())
-        {
-            reverse = reverse + stack.pop();
+        Node temp = head;
+
+        while (temp != null) {
+            original += temp.data;
+            reverse = temp.data + reverse;
+            temp = temp.next;
         }
 
-        if(word.equals(reverse))
-            System.out.println("Palindrome");
-        else
-            System.out.println("Not Palindrome");
+        return original.equals(reverse);
+    }
 
-        scanner.close();
+    public static void main(String[] args) {
+
+        System.out.println("Palindrome Checker App - UC8");
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String word = sc.nextLine();
+
+        Node head = null, tail = null;
+
+        for (char c : word.toCharArray()) {
+            Node newNode = new Node(c);
+
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        if (isPalindrome(head)) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
+
+        sc.close();
     }
 }
