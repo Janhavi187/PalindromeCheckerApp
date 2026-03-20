@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-// Service class (OOP concept)
 class PalindromeService {
 
     public boolean checkPalindrome(String word) {
@@ -26,10 +25,8 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a word: ");
         String word = sc.nextLine();
 
-        // Object creation
         PalindromeService service = new PalindromeService();
 
-        // Calling method
         if (service.checkPalindrome(word)) {
             System.out.println("Palindrome");
         } else {
