@@ -1,60 +1,28 @@
 import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+public class UseCase9PalindromeCheckerApp {
 
-    static class Node {
-        char data;
-        Node next;
+    static boolean isPalindrome(String str, int start, int end) {
 
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
+        if (start >= end)
+            return true;
 
-    public static boolean isPalindrome(Node head) {
+        if (str.charAt(start) != str.charAt(end))
+            return false;
 
-        String original = "";
-        String reverse = "";
-
-        Node temp = head;
-
-        while (temp != null) {
-            original += temp.data;
-            reverse = temp.data + reverse;
-            temp = temp.next;
-        }
-
-        return original.equals(reverse);
+        return isPalindrome(str, start + 1, end - 1);
     }
 
     public static void main(String[] args) {
 
-        System.out.println("Palindrome Checker App - UC8");
-
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter a word: ");
+        System.out.print("Enter word: ");
         String word = sc.nextLine();
 
-        Node head = null, tail = null;
-
-        for (char c : word.toCharArray()) {
-            Node newNode = new Node(c);
-
-            if (head == null) {
-                head = tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        if (isPalindrome(head)) {
+        if (isPalindrome(word, 0, word.length() - 1))
             System.out.println("Palindrome");
-        } else {
+        else
             System.out.println("Not Palindrome");
-        }
 
         sc.close();
     }
